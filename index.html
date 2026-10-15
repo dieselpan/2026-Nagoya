@@ -179,6 +179,12 @@ if(heading){
             const clonedButton=clonedWrap.querySelector('.page-save-button');
             if(clonedButton)clonedButton.remove();
           }
+          const sourceDetails=target.querySelector('.verified');
+          const clonedDetails=clonedDocument.querySelector('.verified');
+          if(sourceDetails&&clonedDetails&&!sourceDetails.open){
+            clonedDetails.open=false;
+            Array.from(clonedDetails.children).forEach(child=>{if(child.tagName!=='SUMMARY')child.style.display='none';});
+          }
         }
       });
       const blob=await new Promise((resolve,reject)=>canvas.toBlob(result=>result?resolve(result):reject(new Error('圖片產生失敗')),'image/png'));
