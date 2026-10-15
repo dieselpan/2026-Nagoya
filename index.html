@@ -90,8 +90,8 @@ body{color:var(--ink);background-color:#f3ecdc;background-image:radial-gradient(
 .day>*{position:relative;z-index:1}
 #day-6,#day-7,#day-8{padding-bottom:58px}
 #day-6 h2::after,#day-7 h2::after,#day-8 h2::after{flex:0 0 auto;margin-left:auto;padding:5px 9px;border:1px dashed var(--day-ink);border-radius:3px 9px 4px 8px;background:rgba(255,255,255,.72);color:var(--day-ink);font:700 10px/1.4 Georgia,serif;letter-spacing:.12em;transform:rotate(2deg)}
-#day-6 h2::after{content:"TAKAYAMA POSTCARD"}
-#day-7 h2::after{content:"AUTUMN PHOTO WALK"}
+#day-6 h2::after{content:"HIDA TRIP"}
+#day-7 h2::after{content:"MAPLE WALK"}
 #day-8 h2::after{content:"JAPAN → TAIWAN"}
 #day-6::after,#day-7::after,#day-8::after{z-index:2;right:22px;bottom:12px;padding:6px 11px;border:1px dashed var(--day-ink);border-radius:3px 8px 4px 7px;background:var(--day-wash);box-shadow:2px 3px 0 rgba(85,65,39,.09);color:var(--day-ink);font:700 12px/1.4 Georgia,serif;letter-spacing:.04em;opacity:1;transform:rotate(-2deg)}
 #day-6::after{content:"🏔️  高山手帳"}
@@ -101,7 +101,7 @@ body{color:var(--ink);background-color:#f3ecdc;background-image:radial-gradient(
 
 
 .day-title{display:flex;flex-direction:column;align-items:flex-start;gap:1px;line-height:1.35}
-.day-date-line{font-size:.78em;color:var(--day-ink,#466b5b);font-weight:750;letter-spacing:.015em}
+.day-date-line{font-size:.7em;color:var(--day-ink,#466b5b);font-weight:750;letter-spacing:.015em;white-space:nowrap}
 .day-place-line{font-size:1em;color:#463a30;font-weight:750}
 </style>
 </head>
@@ -219,7 +219,7 @@ days.forEach((day,index)=>{
   if(titleParts){
     const dateLine=document.createElement('span');
     dateLine.className='day-date-line';
-    dateLine.textContent=titleParts[1];
+    dateLine.textContent=titleParts[1].replace('・日本國定假日','');
     const placeLine=document.createElement('span');
     placeLine.className='day-place-line';
     placeLine.textContent=titleParts[2].trim();
