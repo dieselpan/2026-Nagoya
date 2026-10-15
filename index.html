@@ -31,14 +31,16 @@ html{scroll-behavior:smooth}
 @media(max-width:1359px){.timeline-toggle{display:inline-flex}.timeline-nav.open{display:block;position:fixed;top:auto;left:12px;bottom:calc(68px + env(safe-area-inset-bottom));transform:none;width:min(280px,calc(100vw - 24px));max-height:65vh}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 
-.day h2{display:flex;align-items:center;justify-content:space-between;gap:12px}
-.day-save-button{position:relative;flex:0 0 44px;display:inline-grid;place-items:center;width:44px;height:44px;padding:4px;border:1px solid #d1d9cb;border-radius:50%;background:#315d4d;color:#fff;box-shadow:0 3px 10px rgba(0,0,0,.16);cursor:pointer;transition:transform .15s ease,background .15s ease}
-.day-save-button:hover{background:#244c3d;transform:translateY(-1px)}
-.day-save-button:focus-visible{outline:3px solid #d89638;outline-offset:3px}
-.day-save-button svg{width:32px;height:32px;display:block}
-.day-save-button .download-badge{position:absolute;right:-3px;bottom:-3px;display:grid;place-items:center;width:17px;height:17px;border:2px solid #fff;border-radius:50%;background:#d69b2d;color:#fff;font-size:13px;font-weight:800;line-height:1}
-.day-save-button.is-saving{opacity:.7;cursor:wait}
-@media(max-width:640px){.day-save-button{width:42px;height:42px;flex-basis:42px}}
+
+.hero h1{display:flex;align-items:center;justify-content:space-between;gap:14px}
+.hero-title-text{display:block;flex:1;min-width:0}
+.page-save-button{position:relative;flex:0 0 48px;display:inline-grid;place-items:center;width:48px;height:48px;padding:4px;border:1px solid #d1d9cb;border-radius:50%;background:#315d4d;color:#fff;box-shadow:0 3px 10px rgba(0,0,0,.16);cursor:pointer;transition:transform .15s ease,background .15s ease}
+.page-save-button:hover{background:#244c3d;transform:translateY(-1px)}
+.page-save-button:focus-visible{outline:3px solid #d89638;outline-offset:3px}
+.page-save-button svg{width:34px;height:34px;display:block}
+.page-save-button .download-badge{position:absolute;right:-3px;bottom:-3px;display:grid;place-items:center;width:18px;height:18px;border:2px solid #fff;border-radius:50%;background:#d69b2d;color:#fff;font-size:14px;font-weight:800;line-height:1}
+.page-save-button.is-saving{opacity:.7;cursor:wait}
+@media(max-width:640px){.hero h1{gap:8px}.page-save-button{width:44px;height:44px;flex-basis:44px}}
 
 </style>
 </head>
@@ -133,19 +135,20 @@ function loadCaptureLibrary(){
   return libraryPromise;
 }
 const cleanName=value=>value.replace(/\s+/g,' ').trim();
-document.querySelectorAll('.day[id^="day-"]').forEach(day=>{
-  const heading=day.querySelector(':scope > h2');
-  if(!heading)return;
-  const number=(day.id.match(/\d+/)||[])[0]||'';
-  const label=heading.textContent.trim();
-  const date=(label.match(/11\/\d{2}/)||[''])[0].replace('/','-');
+const heading=document.querySelector('.hero h1');
+if(heading){
+  const title=document.createElement('span');
+  title.className='hero-title-text';
+  title.textContent=heading.textContent.trim();
   const button=document.createElement('button');
   button.type='button';
-  button.className='day-save-button';
-  button.title='另存圖片';
-  button.setAttribute('aria-label','另存圖片：'+label);
+  button.className='page-save-button';
+  button.title='整頁下載';
+  button.setAttribute('aria-label','整頁下載：名古屋親子8天7夜');
   button.setAttribute('data-html2canvas-ignore','true');
   button.innerHTML='<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 4 29 10 24 14 19 10Z" fill="#f2d477"/><path d="M13 17 16 12h16l3 5-3 3H16Z" fill="#f8e9ba"/><path d="M10 22 14 17h20l4 5-4 3H14Z" fill="#f2d477"/><path d="M14 25h20v15H14z" fill="#fff5dc"/><path d="M19 30v10m10-10v10M12 40h24" fill="none" stroke="#f8e9ba" stroke-width="2"/><circle cx="21" cy="29" r="1.4" fill="#315d4d"/><circle cx="27" cy="29" r="1.4" fill="#315d4d"/><path d="M22 33q2 2 4 0" fill="none" stroke="#315d4d" stroke-width="1.4" stroke-linecap="round"/></svg><span class="download-badge" aria-hidden="true">↓</span>';
+  heading.textContent='';
+  heading.append(title,button);
   button.addEventListener('click',async()=>{
     if(button.disabled)return;
     button.disabled=true;
@@ -154,25 +157,26 @@ document.querySelectorAll('.day[id^="day-"]').forEach(day=>{
     try{
       const capture=await loadCaptureLibrary();
       await document.fonts.ready;
-      const canvas=await capture(day,{
+      const target=document.querySelector('.wrap');
+      const canvas=await capture(target,{
         backgroundColor:'#faf7f2',
         scale:2,
         useCORS:true,
         logging:false,
         windowWidth:1440,
-        windowHeight:Math.max(window.innerHeight,1200),
+        windowHeight:Math.max(document.documentElement.scrollHeight,1200),
         scrollX:0,
-        scrollY:-window.scrollY,
-        ignoreElements:element=>element.classList&&element.classList.contains('day-save-button'),
+        scrollY:0,
+        ignoreElements:element=>element.classList&&element.classList.contains('page-save-button'),
         onclone:clonedDocument=>{
-          const clonedDay=clonedDocument.getElementById(day.id);
-          if(clonedDay){
-            clonedDay.style.width='940px';
-            clonedDay.style.maxWidth='none';
-            clonedDay.style.boxSizing='content-box';
-            clonedDay.style.padding='20px';
-            clonedDay.style.margin='16px 0';
-            const clonedButton=clonedDay.querySelector('.day-save-button');
+          const clonedWrap=clonedDocument.querySelector('.wrap');
+          if(clonedWrap){
+            clonedWrap.style.width='980px';
+            clonedWrap.style.maxWidth='none';
+            clonedWrap.style.boxSizing='content-box';
+            clonedWrap.style.margin='0';
+            clonedWrap.style.padding='28px 18px 60px';
+            const clonedButton=clonedWrap.querySelector('.page-save-button');
             if(clonedButton)clonedButton.remove();
           }
         }
@@ -181,20 +185,19 @@ document.querySelectorAll('.day[id^="day-"]').forEach(day=>{
       const url=URL.createObjectURL(blob);
       const link=document.createElement('a');
       link.href=url;
-      link.download=cleanName('名古屋親子8天7夜_Day'+number+(date?'_'+date:'')+'.png');
+      link.download=cleanName('名古屋親子8天7夜_完整行程_電腦版.png');
       document.body.appendChild(link);
       link.click();
       link.remove();
-      setTimeout(()=>URL.revokeObjectURL(url),1500);
+      setTimeout(()=>URL.revokeObjectURL(url),2000);
     }catch(error){
-      window.alert('圖片另存失敗，請確認網路後再試一次。');
+      window.alert('整頁圖片另存失敗，請確認網路後再試一次。');
     }finally{
       button.disabled=false;
       button.classList.remove('is-saving');
       button.removeAttribute('aria-busy');
     }
   });
-  heading.appendChild(button);
-});
+}
 })();
 </script></body></html>
