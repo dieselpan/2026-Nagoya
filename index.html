@@ -215,7 +215,7 @@ days.forEach((day,index)=>{
   const dayLabel='Day'+(index+1);
   const title=document.createElement('span');
   title.className='day-title';
-  const titleParts=dayTitle.match(/^(Day\\s*\\d+｜\\d{1,2}\\/\\d{1,2}（[^）]+）)([\\s\\S]+)$/);
+  const titleParts=dayTitle.match(/^(Day\s*\d+｜\d{1,2}\/\d{1,2}（[^）]+）)([\s\S]+)$/);
   if(titleParts){
     const dateLine=document.createElement('span');
     dateLine.className='day-date-line';
