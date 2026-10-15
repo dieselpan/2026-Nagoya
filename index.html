@@ -101,6 +101,17 @@ body{color:var(--ink);background-color:#f3ecdc;background-image:radial-gradient(
 .day-title{display:flex;flex-direction:column;align-items:flex-start;gap:1px;line-height:1.35}
 .day-date-line{font-size:.7em;color:var(--day-ink,#466b5b);font-weight:750;letter-spacing:.015em;white-space:nowrap}
 .day-place-line{font-size:1em;color:#463a30;font-weight:750}
+
+/* Playful, draggable Nagoya transport stickers */
+.vehicle-playground{position:fixed;inset:0;z-index:20;overflow:hidden;pointer-events:none}
+.vehicle{position:absolute;top:0;left:0;display:grid;place-items:center;padding:0;border:0;background:transparent;pointer-events:auto;touch-action:none;user-select:none;-webkit-user-select:none;cursor:grab;opacity:.2;filter:drop-shadow(0 4px 3px rgba(62,48,35,.22));transition:opacity .18s ease,filter .18s ease}
+.vehicle:hover,.vehicle:focus-visible{opacity:.88;filter:drop-shadow(0 6px 5px rgba(62,48,35,.3))}
+.vehicle.is-dragging{opacity:1;cursor:grabbing;z-index:2;filter:drop-shadow(0 8px 8px rgba(62,48,35,.34))}
+.vehicle:focus-visible{outline:3px solid #d89638;outline-offset:3px;border-radius:12px}
+.vehicle svg{display:block;width:100%;height:100%;overflow:visible;pointer-events:none}
+#vehicle-train{width:150px;height:62px}
+#vehicle-racer,#vehicle-taxi{width:104px;height:62px}
+@media(prefers-reduced-motion:reduce){.vehicle{transition:none}}
 </style>
 </head>
 <body>
@@ -118,6 +129,44 @@ body{color:var(--ink);background-color:#f3ecdc;background-image:radial-gradient(
     <li><a href="#day-8">Day 8｜中部國際機場＋回台</a></li>
   </ol>
 </nav>
+<div class="vehicle-playground" id="vehicle-playground" aria-label="可拖曳的名古屋交通小車">
+  <button class="vehicle" id="vehicle-train" type="button" aria-label="拖曳新幹線" title="按住拖曳新幹線">
+    <svg viewBox="0 0 180 72" aria-hidden="true" focusable="false">
+      <path d="M13 47 27 30q8-11 21-11h91q13 1 22 13l15 13v9H13z" fill="#f9fbff" stroke="#667d89" stroke-width="2"/>
+      <path d="M25 43 37 28q4-5 12-5h90q10 1 18 11l9 9z" fill="#dceaf0"/>
+      <path d="M17 45h156v7H15z" fill="#26779a"/>
+      <path d="M37 29h18v11H29zM61 27h20v13H53zM86 27h20v13H86zM111 27h20v13H111zM137 28q8 2 13 11h-19V28z" fill="#709eaf"/>
+      <path d="M14 46h161" stroke="#e4a24b" stroke-width="2"/>
+      <circle cx="46" cy="54" r="3" fill="#52636b"/><circle cx="146" cy="54" r="3" fill="#52636b"/>
+      <path d="M171 43h8v5h-8" fill="#ed9e54"/>
+      <text x="75" y="50" fill="#fff" font-size="8" font-family="sans-serif" font-weight="700">SHINKANSEN</text>
+    </svg>
+  </button>
+  <button class="vehicle" id="vehicle-racer" type="button" aria-label="拖曳卡通跑車" title="按住拖曳卡通跑車">
+    <svg viewBox="0 0 120 72" aria-hidden="true" focusable="false">
+      <path d="M15 45h10l9-15q4-6 12-7h33q9 1 16 9l9 7h8v13H13z" fill="#d85b4d" stroke="#754238" stroke-width="2"/>
+      <path d="m39 31 7-7h18v12H34zM69 24h9q7 1 13 10H69z" fill="#cce4e8" stroke="#754238" stroke-width="1.5"/>
+      <path d="M17 43h91v7H17z" fill="#f5c36e"/>
+      <path d="M15 36h-7v3h8M107 38h7v4h-7" fill="#473c38"/>
+      <circle cx="34" cy="52" r="8" fill="#393d40"/><circle cx="34" cy="52" r="3.5" fill="#e9e2d4"/>
+      <circle cx="91" cy="52" r="8" fill="#393d40"/><circle cx="91" cy="52" r="3.5" fill="#e9e2d4"/>
+      <path d="M91 27h13v-5H91M98 22v-5" fill="none" stroke="#754238" stroke-width="3" stroke-linecap="round"/>
+      <path d="M50 41h18" stroke="#fff1df" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+  </button>
+  <button class="vehicle" id="vehicle-taxi" type="button" aria-label="拖曳日本計程車" title="按住拖曳日本計程車">
+    <svg viewBox="0 0 120 72" aria-hidden="true" focusable="false">
+      <path d="M13 43h10l8-15q3-6 12-7h36q8 1 13 8l9 9h8v15H12z" fill="#fffaf0" stroke="#65615a" stroke-width="2"/>
+      <path d="M36 29q3-6 10-6h15v14H28zM66 23h11q7 1 13 14H66z" fill="#c9e1e5" stroke="#65615a" stroke-width="1.5"/>
+      <path d="M14 42h94v8H14z" fill="#e3bd63"/>
+      <rect x="52" y="15" width="18" height="8" rx="3" fill="#d85c4f" stroke="#7b453a" stroke-width="1.5"/>
+      <text x="55" y="21" fill="#fff" font-size="5.5" font-family="sans-serif" font-weight="700">TAXI</text>
+      <path d="M18 38h-6v4h7M105 37h7v5h-7" fill="#f4d174"/>
+      <circle cx="34" cy="53" r="8" fill="#3c3e40"/><circle cx="34" cy="53" r="3.5" fill="#e9e2d4"/>
+      <circle cx="91" cy="53" r="8" fill="#3c3e40"/><circle cx="91" cy="53" r="3.5" fill="#e9e2d4"/>
+    </svg>
+  </button>
+</div>
 <div class="wrap" id="page-top">
 <div class="hero">
 <h1>🍁 2026 名古屋親子 8 天 7 夜</h1>
@@ -303,5 +352,91 @@ days.forEach((day,index)=>{
     }
   });
 });
+})();
+</script><script>
+(()=>{
+  const layer=document.getElementById('vehicle-playground');
+  if(!layer)return;
+  const reducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const initial=[
+    {id:'vehicle-train',x:.04,y:.18,vx:68,vy:8},
+    {id:'vehicle-racer',x:.66,y:.49,vx:-42,vy:17},
+    {id:'vehicle-taxi',x:.27,y:.76,vx:31,vy:-12}
+  ];
+  const cars=initial.map(seed=>{
+    const el=document.getElementById(seed.id);
+    const car={el,x:0,y:0,vx:reducedMotion?0:seed.vx,vy:reducedMotion?0:seed.vy,dragging:false,offsetX:0,offsetY:0};
+    car.x=Math.max(0,Math.min(innerWidth-el.offsetWidth,seed.x*innerWidth));
+    car.y=Math.max(70,Math.min(innerHeight-el.offsetHeight-24,seed.y*innerHeight));
+    paint(car);
+    el.addEventListener('pointerdown',ev=>{
+      if(ev.button!==undefined&&ev.button!==0)return;
+      ev.preventDefault();
+      car.dragging=true;
+      car.offsetX=ev.clientX-car.x;
+      car.offsetY=ev.clientY-car.y;
+      el.classList.add('is-dragging');
+      if(el.setPointerCapture)el.setPointerCapture(ev.pointerId);
+    });
+    el.addEventListener('pointermove',ev=>{
+      if(!car.dragging)return;
+      car.x=clamp(ev.clientX-car.offsetX,0,innerWidth-el.offsetWidth);
+      car.y=clamp(ev.clientY-car.offsetY,70,Math.max(70,innerHeight-el.offsetHeight-24));
+      paint(car);
+    });
+    const stop=ev=>{
+      if(!car.dragging)return;
+      car.dragging=false;
+      el.classList.remove('is-dragging');
+      if(el.hasPointerCapture&&el.hasPointerCapture(ev.pointerId))el.releasePointerCapture(ev.pointerId);
+    };
+    el.addEventListener('pointerup',stop);
+    el.addEventListener('pointercancel',stop);
+    el.addEventListener('keydown',ev=>{
+      const step=ev.shiftKey?36:18;
+      if(!['ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(ev.key))return;
+      ev.preventDefault();
+      if(ev.key==='ArrowLeft')car.x-=step;
+      if(ev.key==='ArrowRight')car.x+=step;
+      if(ev.key==='ArrowUp')car.y-=step;
+      if(ev.key==='ArrowDown')car.y+=step;
+      car.x=clamp(car.x,0,innerWidth-el.offsetWidth);
+      car.y=clamp(car.y,70,Math.max(70,innerHeight-el.offsetHeight-24));
+      paint(car);
+    });
+    return car;
+  });
+  function clamp(value,min,max){return Math.max(min,Math.min(max,value));}
+  function paint(car){
+    const facing=car.vx<0?-1:1;
+    car.el.style.transform='translate3d('+car.x+'px,'+car.y+'px,0) scaleX('+facing+')';
+  }
+  let last=0;
+  function tick(now){
+    if(!last)last=now;
+    const dt=Math.min((now-last)/1000,.05);
+    last=now;
+    for(const car of cars){
+      if(car.dragging)continue;
+      car.x+=car.vx*dt;
+      car.y+=car.vy*dt;
+      const maxX=Math.max(0,innerWidth-car.el.offsetWidth);
+      const maxY=Math.max(70,innerHeight-car.el.offsetHeight-24);
+      if(car.x<0){car.x=0;car.vx=Math.abs(car.vx);}
+      if(car.x>maxX){car.x=maxX;car.vx=-Math.abs(car.vx);}
+      if(car.y<70){car.y=70;car.vy=Math.abs(car.vy);}
+      if(car.y>maxY){car.y=maxY;car.vy=-Math.abs(car.vy);}
+      paint(car);
+    }
+    requestAnimationFrame(tick);
+  }
+  window.addEventListener('resize',()=>{
+    for(const car of cars){
+      car.x=clamp(car.x,0,Math.max(0,innerWidth-car.el.offsetWidth));
+      car.y=clamp(car.y,70,Math.max(70,innerHeight-car.el.offsetHeight-24));
+      paint(car);
+    }
+  });
+  if(!reducedMotion)requestAnimationFrame(tick);
 })();
 </script></body></html>
