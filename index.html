@@ -143,8 +143,8 @@ if(heading){
   const button=document.createElement('button');
   button.type='button';
   button.className='page-save-button';
-  button.title='整頁下載';
-  button.setAttribute('aria-label','整頁下載：名古屋親子8天7夜');
+  button.title='整頁下載；iPhone 可選儲存影像到照片';
+  button.setAttribute('aria-label','整頁下載：名古屋親子8天7夜；iPhone 可選儲存影像到照片');
   button.setAttribute('data-html2canvas-ignore','true');
   button.innerHTML='<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 4 29 10 24 14 19 10Z" fill="#f2d477"/><path d="M13 17 16 12h16l3 5-3 3H16Z" fill="#f8e9ba"/><path d="M10 22 14 17h20l4 5-4 3H14Z" fill="#f2d477"/><path d="M14 25h20v15H14z" fill="#fff5dc"/><path d="M19 30v10m10-10v10M12 40h24" fill="none" stroke="#f8e9ba" stroke-width="2"/><circle cx="21" cy="29" r="1.4" fill="#315d4d"/><circle cx="27" cy="29" r="1.4" fill="#315d4d"/><path d="M22 33q2 2 4 0" fill="none" stroke="#315d4d" stroke-width="1.4" stroke-linecap="round"/></svg><span class="download-badge" aria-hidden="true">↓</span>';
   heading.textContent='';
@@ -188,14 +188,27 @@ if(heading){
         }
       });
       const blob=await new Promise((resolve,reject)=>canvas.toBlob(result=>result?resolve(result):reject(new Error('圖片產生失敗')),'image/png'));
-      const url=URL.createObjectURL(blob);
-      const link=document.createElement('a');
-      link.href=url;
-      link.download=cleanName('名古屋親子8天7夜_完整行程_電腦版.png');
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-      setTimeout(()=>URL.revokeObjectURL(url),2000);
+      const filename=cleanName('名古屋親子8天7夜_完整行程_電腦版.png');
+      const downloadImage=()=>{
+        const url=URL.createObjectURL(blob);
+        const link=document.createElement('a');
+        link.href=url;
+        link.download=filename;
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        setTimeout(()=>URL.revokeObjectURL(url),30000);
+      };
+      const imageFile=new File([blob],filename,{type:'image/png'});
+      if(navigator.share&&navigator.canShare&&navigator.canShare({files:[imageFile]})){
+        navigator.share({files:[imageFile]}).catch(error=>{
+          if(error&&error.name==='AbortError')return;
+          downloadImage();
+          window.alert('分享選單無法開啟，圖片已下載至「檔案」。請長按圖片，選「分享」→「儲存影像」放入照片。');
+        });
+        return;
+      }
+      downloadImage();
     }catch(error){
       window.alert('整頁圖片另存失敗，請確認網路後再試一次。');
     }finally{
