@@ -158,12 +158,14 @@ if(heading){
       const capture=await loadCaptureLibrary();
       await document.fonts.ready;
       const target=document.querySelector('.wrap');
+      const mobileCapture=window.matchMedia('(max-width:640px)').matches;
+      const captureWidth=mobileCapture?Math.max(320,Math.min(window.innerWidth||390,430)):1440;
       const canvas=await capture(target,{
         backgroundColor:'#faf7f2',
         scale:2,
         useCORS:true,
         logging:false,
-        windowWidth:1440,
+        windowWidth:captureWidth,
         windowHeight:Math.max(document.documentElement.scrollHeight,1200),
         scrollX:0,
         scrollY:0,
@@ -171,11 +173,11 @@ if(heading){
         onclone:clonedDocument=>{
           const clonedWrap=clonedDocument.querySelector('.wrap');
           if(clonedWrap){
-            clonedWrap.style.width='980px';
+            clonedWrap.style.width=mobileCapture?'auto':'980px';
             clonedWrap.style.maxWidth='none';
-            clonedWrap.style.boxSizing='content-box';
+            clonedWrap.style.boxSizing=mobileCapture?'border-box':'content-box';
             clonedWrap.style.margin='0';
-            clonedWrap.style.padding='28px 18px 60px';
+            clonedWrap.style.padding=mobileCapture?'18px 18px 60px':'28px 18px 60px';
             const clonedButton=clonedWrap.querySelector('.page-save-button');
             if(clonedButton)clonedButton.remove();
           }
@@ -188,7 +190,7 @@ if(heading){
         }
       });
       const blob=await new Promise((resolve,reject)=>canvas.toBlob(result=>result?resolve(result):reject(new Error('圖片產生失敗')),'image/png'));
-      const filename=cleanName('名古屋親子8天7夜_完整行程_電腦版.png');
+      const filename=cleanName('名古屋親子8天7夜_完整行程_'+(mobileCapture?'手機版':'電腦版')+'.png');
       const downloadImage=()=>{
         const url=URL.createObjectURL(blob);
         const link=document.createElement('a');
