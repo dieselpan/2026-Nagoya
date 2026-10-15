@@ -84,6 +84,21 @@ body{color:var(--ink);background-color:#f3ecdc;background-image:radial-gradient(
 @media(max-width:640px){.hero{padding:27px 82px 22px 20px}.hero::before{left:22px;width:84px}.hero::after{right:15px;top:22px;width:54px;height:65px;font-size:7px;letter-spacing:.08em;outline-width:3px}.hero h1{font-size:24px;line-height:1.35}.sub{font-size:14px;line-height:1.55}.sub::before{font-size:9px}.day{padding:16px 14px 20px}.day h2{font-size:19px}.day::after{font-size:32px;right:10px;bottom:8px}.timeline li{padding:8px 2px}.time{min-width:58px}}
 @media print{body{background:#fff}.hero,.verified,.day{box-shadow:none}}
 
+
+/* Make the long travel-diary days visibly distinct and keep their stickers above the paper */
+.day::after{z-index:0}
+.day>*{position:relative;z-index:1}
+#day-6,#day-7,#day-8{padding-bottom:58px}
+#day-6 h2::after,#day-7 h2::after,#day-8 h2::after{flex:0 0 auto;margin-left:auto;padding:5px 9px;border:1px dashed var(--day-ink);border-radius:3px 9px 4px 8px;background:rgba(255,255,255,.72);color:var(--day-ink);font:700 10px/1.4 Georgia,serif;letter-spacing:.12em;transform:rotate(2deg)}
+#day-6 h2::after{content:"TAKAYAMA POSTCARD"}
+#day-7 h2::after{content:"AUTUMN PHOTO WALK"}
+#day-8 h2::after{content:"JAPAN → TAIWAN"}
+#day-6::after,#day-7::after,#day-8::after{z-index:2;right:22px;bottom:12px;padding:6px 11px;border:1px dashed var(--day-ink);border-radius:3px 8px 4px 7px;background:var(--day-wash);box-shadow:2px 3px 0 rgba(85,65,39,.09);color:var(--day-ink);font:700 12px/1.4 Georgia,serif;letter-spacing:.04em;opacity:1;transform:rotate(-2deg)}
+#day-6::after{content:"🏔️  高山手帳"}
+#day-7::after{content:"🍁  賞楓紀念"}
+#day-8::after{content:"✈️  SEE YOU AGAIN"}
+@media(max-width:640px){#day-6 h2::after,#day-7 h2::after,#day-8 h2::after{display:none}#day-6::after,#day-7::after,#day-8::after{font-size:10px;right:13px}}
+
 </style>
 </head>
 <body>
