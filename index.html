@@ -32,15 +32,14 @@ html{scroll-behavior:smooth}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 
 
-.hero h1{display:flex;align-items:center;justify-content:space-between;gap:14px}
-.hero-title-text{display:block;flex:1;min-width:0}
-.page-save-button{position:relative;flex:0 0 48px;display:inline-grid;place-items:center;width:48px;height:48px;padding:4px;border:1px solid #d1d9cb;border-radius:50%;background:#315d4d;color:#fff;box-shadow:0 3px 10px rgba(0,0,0,.16);cursor:pointer;transition:transform .15s ease,background .15s ease}
-.page-save-button:hover{background:#244c3d;transform:translateY(-1px)}
-.page-save-button:focus-visible{outline:3px solid #d89638;outline-offset:3px}
-.page-save-button svg{width:34px;height:34px;display:block}
-.page-save-button .download-badge{position:absolute;right:-3px;bottom:-3px;display:grid;place-items:center;width:18px;height:18px;border:2px solid #fff;border-radius:50%;background:#d69b2d;color:#fff;font-size:14px;font-weight:800;line-height:1}
-.page-save-button.is-saving{opacity:.7;cursor:wait}
-@media(max-width:640px){.hero h1{gap:8px}.page-save-button{width:44px;height:44px;flex-basis:44px}}
+.day h2{display:flex;align-items:flex-start;gap:10px}
+.day-title{flex:1;min-width:0}
+.day-save-button{position:relative;flex:0 0 42px;width:42px;height:42px;padding:0;border:2px solid #fff;border-radius:13px;color:#fff;box-shadow:0 2px 8px rgba(0,0,0,.18);cursor:pointer;display:grid;place-items:center;font-size:21px;line-height:1;transition:transform .15s ease,filter .15s ease}
+.day-save-button:hover{filter:brightness(.92);transform:translateY(-1px)}
+.day-save-button:focus-visible{outline:3px solid #d89638;outline-offset:3px}
+.day-save-button .day-save-arrow{position:absolute;right:-5px;bottom:-5px;display:grid;place-items:center;width:17px;height:17px;border:2px solid #fff;border-radius:50%;background:#d69b2d;color:#fff;font-size:12px;font-weight:800;line-height:1}
+.day-save-button.is-saving{opacity:.65;cursor:wait}
+@media(max-width:640px){.day h2{gap:8px}.day-save-button{flex-basis:38px;width:38px;height:38px;font-size:19px}.day-save-button .day-save-arrow{width:16px;height:16px;font-size:11px}}
 
 </style>
 </head>
@@ -120,7 +119,19 @@ window.addEventListener('resize',()=>{if(current){shade.hidden=!(mobile()&&pinne
 (()=>{const nav=document.getElementById('timeline-nav'),toggle=document.getElementById('timeline-toggle'),close=document.getElementById('timeline-close'),top=document.getElementById('back-top');const setOpen=value=>{nav.classList.toggle('open',value);toggle.setAttribute('aria-expanded',String(value));};toggle.addEventListener('click',()=>setOpen(!nav.classList.contains('open')));close.addEventListener('click',()=>setOpen(false));nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>setOpen(false)));document.addEventListener('keydown',e=>{if(e.key==='Escape')setOpen(false);});const updateTop=()=>{top.hidden=window.scrollY<=window.innerHeight;};window.addEventListener('scroll',updateTop,{passive:true});window.addEventListener('resize',updateTop);updateTop();})();
 </script><script>
 (()=> {
-let libraryPromise=null;
+let libraryP<script>
+(()=> {
+let libraryPromise=null,saving=false;
+const themes=[
+  {icon:'✈️',color:'#3c6a7b'},
+  {icon:'🏭',color:'#4f6c58'},
+  {icon:'🐬',color:'#2f7695'},
+  {icon:'🧱',color:'#c94d3f'},
+  {icon:'🏯',color:'#8d5d3e'},
+  {icon:'🏔️',color:'#507a8a'},
+  {icon:'🍁',color:'#c66537'},
+  {icon:'🛫',color:'#54718a'}
+];
 function loadCaptureLibrary(){
   if(window.html2canvas)return Promise.resolve(window.html2canvas);
   if(libraryPromise)return libraryPromise;
@@ -135,33 +146,39 @@ function loadCaptureLibrary(){
   return libraryPromise;
 }
 const cleanName=value=>value.replace(/\s+/g,' ').trim();
-const heading=document.querySelector('.hero h1');
-if(heading){
+const days=[...document.querySelectorAll('.day')],buttons=[];
+days.forEach((day,index)=>{
+  const heading=day.querySelector('h2');
+  if(!heading)return;
+  const theme=themes[index]||{icon:'📍',color:'#315d4d'};
+  const dayTitle=heading.textContent.trim();
+  const dayLabel='Day'+(index+1);
   const title=document.createElement('span');
-  title.className='hero-title-text';
-  title.textContent=heading.textContent.trim();
+  title.className='day-title';
+  title.textContent=dayTitle;
   const button=document.createElement('button');
   button.type='button';
-  button.className='page-save-button';
-  button.title='整頁下載；iPhone 可選儲存影像到照片';
-  button.setAttribute('aria-label','整頁下載：名古屋親子8天7夜；iPhone 可選儲存影像到照片');
+  button.className='day-save-button';
+  button.title='下載 '+dayLabel+' 行程圖片';
+  button.setAttribute('aria-label','下載 '+dayLabel+' 行程圖片：'+dayTitle);
   button.setAttribute('data-html2canvas-ignore','true');
-  button.innerHTML='<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 4 29 10 24 14 19 10Z" fill="#f2d477"/><path d="M13 17 16 12h16l3 5-3 3H16Z" fill="#f8e9ba"/><path d="M10 22 14 17h20l4 5-4 3H14Z" fill="#f2d477"/><path d="M14 25h20v15H14z" fill="#fff5dc"/><path d="M19 30v10m10-10v10M12 40h24" fill="none" stroke="#f8e9ba" stroke-width="2"/><circle cx="21" cy="29" r="1.4" fill="#315d4d"/><circle cx="27" cy="29" r="1.4" fill="#315d4d"/><path d="M22 33q2 2 4 0" fill="none" stroke="#315d4d" stroke-width="1.4" stroke-linecap="round"/></svg><span class="download-badge" aria-hidden="true">↓</span>';
-  heading.textContent='';
-  heading.append(title,button);
+  button.style.backgroundColor=theme.color;
+  button.innerHTML='<span class="day-theme-icon" aria-hidden="true">'+theme.icon+'</span><span class="day-save-arrow" aria-hidden="true">↓</span>';
+  heading.replaceChildren(button,title);
+  buttons.push(button);
   button.addEventListener('click',async()=>{
-    if(button.disabled)return;
-    button.disabled=true;
+    if(button.disabled||saving)return;
+    saving=true;
+    buttons.forEach(item=>{item.disabled=true;});
     button.classList.add('is-saving');
     button.setAttribute('aria-busy','true');
     try{
       const capture=await loadCaptureLibrary();
       await document.fonts.ready;
-      const target=document.querySelector('.wrap');
       const mobileCapture=window.matchMedia('(max-width:640px)').matches;
       const captureWidth=mobileCapture?Math.max(320,Math.min(window.innerWidth||390,430)):1440;
-      const captureScale=mobileCapture?Math.min(2,Math.max(1,15000/Math.max(target.scrollHeight,1))):2;
-      const canvas=await capture(target,{
+      const captureScale=mobileCapture?Math.min(2,Math.max(1,15000/Math.max(day.scrollHeight,1))):2;
+      const canvas=await capture(day,{
         backgroundColor:'#faf7f2',
         scale:captureScale,
         useCORS:true,
@@ -170,7 +187,7 @@ if(heading){
         windowHeight:Math.max(document.documentElement.scrollHeight,1200),
         scrollX:0,
         scrollY:0,
-        ignoreElements:element=>element.classList&&element.classList.contains('page-save-button'),
+        ignoreElements:element=>element.classList&&element.classList.contains('day-save-button'),
         onclone:clonedDocument=>{
           const clonedWrap=clonedDocument.querySelector('.wrap');
           if(clonedWrap){
@@ -179,19 +196,14 @@ if(heading){
             clonedWrap.style.boxSizing=mobileCapture?'border-box':'content-box';
             clonedWrap.style.margin='0';
             clonedWrap.style.padding=mobileCapture?'18px 18px 60px':'28px 18px 60px';
-            const clonedButton=clonedWrap.querySelector('.page-save-button');
-            if(clonedButton)clonedButton.remove();
           }
-          const sourceDetails=target.querySelector('.verified');
-          const clonedDetails=clonedDocument.querySelector('.verified');
-          if(sourceDetails&&clonedDetails&&!sourceDetails.open){
-            clonedDetails.open=false;
-            Array.from(clonedDetails.children).forEach(child=>{if(child.tagName!=='SUMMARY')child.style.display='none';});
-          }
+          const clonedDay=clonedDocument.getElementById(day.id);
+          const clonedButton=clonedDay&&clonedDay.querySelector('.day-save-button');
+          if(clonedButton)clonedButton.remove();
         }
       });
       const blob=await new Promise((resolve,reject)=>canvas.toBlob(result=>result?resolve(result):reject(new Error('圖片產生失敗')),'image/png'));
-      const filename=cleanName('名古屋親子8天7夜_完整行程_'+(mobileCapture?'手機版':'電腦版')+'.png');
+      const filename=cleanName('名古屋親子8天7夜_'+dayLabel+'_'+(mobileCapture?'手機版':'電腦版')+'.png');
       const downloadImage=()=>{
         const url=URL.createObjectURL(blob);
         const link=document.createElement('a');
@@ -203,23 +215,24 @@ if(heading){
         setTimeout(()=>URL.revokeObjectURL(url),30000);
       };
       const imageFile=new File([blob],filename,{type:'image/png'});
-      if(navigator.share&&navigator.canShare&&navigator.canShare({files:[imageFile]})){
+      if(mobileCapture&&navigator.share&&navigator.canShare&&navigator.canShare({files:[imageFile]})){
         navigator.share({files:[imageFile]}).catch(error=>{
           if(error&&error.name==='AbortError')return;
           downloadImage();
-          window.alert('分享選單無法開啟，圖片已下載至「檔案」。請長按圖片，選「分享」→「儲存影像」放入照片。');
+          window.alert(dayLabel+'分享選單無法開啟，圖片已下載至「檔案」。請長按圖片，選「分享」→「儲存影像」放入照片。');
         });
         return;
       }
       downloadImage();
     }catch(error){
-      window.alert('整頁圖片另存失敗，請確認網路後再試一次。');
+      window.alert(dayLabel+'圖片另存失敗，請確認網路後再試一次。');
     }finally{
-      button.disabled=false;
+      saving=false;
+      buttons.forEach(item=>{item.disabled=false;});
       button.classList.remove('is-saving');
       button.removeAttribute('aria-busy');
     }
   });
-}
+});
 })();
-</script></body></html>
+</script>
