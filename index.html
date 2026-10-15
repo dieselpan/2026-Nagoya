@@ -40,6 +40,50 @@ html{scroll-behavior:smooth}
 .day-save-button.is-saving{opacity:.65;cursor:wait}
 @media(max-width:640px){.day h2{gap:8px}.day-save-button{flex-basis:38px;width:38px;height:38px;font-size:19px}}
 
+
+/* Warm scrapbook travel-diary visual refresh */
+:root{color-scheme:light;--paper:#fffdf7;--ink:#473b31;--muted:#766b5e;--line:#e8ddc9;--forest:#466b5b;--coral:#b96357}
+body{color:var(--ink);background-color:#f3ecdc;background-image:radial-gradient(ellipse at 12% 4%,rgba(255,255,255,.9),transparent 30%),radial-gradient(ellipse at 92% 28%,rgba(231,206,166,.24),transparent 34%),repeating-linear-gradient(0deg,rgba(138,111,73,.035) 0 1px,transparent 1px 5px)}
+.wrap{max-width:1020px}
+.hero{position:relative;overflow:hidden;padding:30px 150px 26px 30px;background:linear-gradient(115deg,#fffdf7 0%,#fff9ed 70%,#f5e9d3 100%);border:1px solid #e6dac4;border-radius:8px 18px 12px 18px;box-shadow:0 8px 22px rgba(85,65,39,.10),4px 5px 0 rgba(207,185,145,.18)}
+.hero::before{content:"";position:absolute;top:8px;left:34px;width:112px;height:22px;background:repeating-linear-gradient(135deg,rgba(205,157,107,.25) 0 7px,rgba(255,255,255,.48) 7px 14px);transform:rotate(-5deg);opacity:.85}
+.hero::after{content:"NAGOYA\A AUTUMN 2026\A ✈";white-space:pre;position:absolute;right:24px;top:22px;width:92px;height:100px;display:grid;place-content:center;text-align:center;box-sizing:border-box;border:1px solid #cdbb9b;outline:4px solid rgba(255,255,255,.82);background:linear-gradient(145deg,#e7edf0,#fffdf7 60%,#f4e8d3);box-shadow:2px 4px 8px rgba(72,54,34,.16);color:#6e7e7e;font:700 10px/1.65 Georgia,serif;letter-spacing:.14em;transform:rotate(5deg)}
+.hero h1{font-family:"Palatino Linotype","Noto Serif TC","Songti TC",serif;font-size:clamp(26px,4vw,36px);letter-spacing:.035em;color:#4c3d30}
+.sub{display:inline-block;margin-top:4px;padding:6px 12px;background:#f4dfd6;border-radius:3px 10px 5px 8px;color:#754c43;box-decoration-break:clone;-webkit-box-decoration-break:clone;transform:rotate(-.5deg)}
+.sub::before{content:"TRAVEL DIARY  •  ";font:700 10px/1.5 Georgia,serif;letter-spacing:.15em;color:#9b6d5d}
+.verified{background:linear-gradient(115deg,#fffdf7,#faf5e9);border:1px dashed #d2c3a7;border-radius:12px;box-shadow:0 4px 12px rgba(85,65,39,.06)}
+.verified summary{color:#665443}
+.verified summary::marker{color:#b77849}
+.verified a{color:#3f6b62}
+.day{position:relative;isolation:isolate;overflow:hidden;box-sizing:border-box;background-color:var(--paper);background-image:repeating-linear-gradient(0deg,transparent 0 32px,rgba(141,119,84,.075) 32px 33px);border:1px solid #e5d9c3;border-left:6px solid var(--day-ink,#66857a);border-radius:9px 17px 11px 17px;padding:20px 22px 24px;margin:0;box-shadow:0 6px 17px rgba(85,65,39,.075),2px 3px 0 rgba(206,188,154,.16)}
+.day::after{content:var(--day-doodle,"✈️");position:absolute;z-index:-1;right:16px;bottom:8px;font-size:42px;line-height:1;opacity:.14;transform:rotate(-9deg);pointer-events:none}
+.day h2{position:relative;margin:0 0 10px;padding:8px 9px 11px;background:linear-gradient(100deg,var(--day-wash,#edf3ec),rgba(255,253,247,.75));border-bottom:1px dashed var(--day-rule,rgba(70,107,91,.35));border-radius:5px 11px 5px 9px;color:#453b32;font-size:21px}
+.day-title{line-height:1.45}
+.day-save-button{border-radius:12px 12px 12px 4px;box-shadow:0 3px 8px rgba(73,55,35,.19)}
+.tag{background:var(--day-wash,#edf3ec);color:var(--day-ink,#466b5b);border:1px solid var(--day-rule,rgba(70,107,91,.22));font-weight:650}
+.timeline{position:relative;margin-top:13px;padding-left:4px}
+.timeline li{padding:8px 4px;border-bottom:1px dashed rgba(139,119,86,.22)}
+.time{color:var(--day-ink,#466b5b);font-variant-numeric:tabular-nums}
+.spot{color:#365f55;border-bottom-color:#a1805b}
+.spot:hover,.spot[aria-expanded="true"]{background:var(--day-wash,#edf3ec);border-radius:4px}
+.tip{background:linear-gradient(110deg,var(--day-wash,#edf3ec),#fffdf7);border-left:3px solid var(--day-ink,#66857a);border-radius:4px 10px 10px 4px;color:#5e5548}
+#day-1{--day-ink:#b45d53;--day-wash:#f7e8e3;--day-rule:rgba(180,93,83,.27);--day-doodle:"✈️"}
+#day-2{--day-ink:#ad8544;--day-wash:#f8f0d9;--day-rule:rgba(173,133,68,.28);--day-doodle:"🏭"}
+#day-3{--day-ink:#4d8178;--day-wash:#e8f1e9;--day-rule:rgba(77,129,120,.27);--day-doodle:"🐬"}
+#day-4{--day-ink:#b95849;--day-wash:#f8e8e1;--day-rule:rgba(185,88,73,.27);--day-doodle:"🧱"}
+#day-5{--day-ink:#8a6748;--day-wash:#f2e9d9;--day-rule:rgba(138,103,72,.27);--day-doodle:"🏯"}
+#day-6{--day-ink:#568094;--day-wash:#e7f0f2;--day-rule:rgba(86,128,148,.27);--day-doodle:"🏔️"}
+#day-7{--day-ink:#bb694b;--day-wash:#f8e9df;--day-rule:rgba(187,105,75,.27);--day-doodle:"🍁"}
+#day-8{--day-ink:#627c8a;--day-wash:#e9eef0;--day-rule:rgba(98,124,138,.27);--day-doodle:"🛫"}
+.timeline-toggle,.back-top{background:#496c5c;border:1px solid rgba(255,255,255,.78);box-shadow:0 5px 14px rgba(62,79,60,.22)}
+.timeline-nav{background:#fffdf7;border-color:#e4d7c1;box-shadow:0 8px 24px rgba(78,61,39,.15)}
+.timeline-nav a{color:#466b5b}
+.spot-card{background-color:#fffdf7;background-image:repeating-linear-gradient(0deg,transparent 0 31px,rgba(141,119,84,.06) 31px 32px);border-color:#e3d5bc}
+@media(min-width:900px){.wrap{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 20px}.hero,.verified,.footer{grid-column:1/-1}.hero,.verified{margin:0}.day{grid-column:span 1}#day-6,#day-7,#day-8{grid-column:1/-1}.day h2{font-size:20px}}
+@media(max-width:899px){.wrap{display:block}.hero,.verified{margin-bottom:18px}.day{margin:16px 0}}
+@media(max-width:640px){.hero{padding:27px 82px 22px 20px}.hero::before{left:22px;width:84px}.hero::after{right:15px;top:22px;width:54px;height:65px;font-size:7px;letter-spacing:.08em;outline-width:3px}.hero h1{font-size:24px;line-height:1.35}.sub{font-size:14px;line-height:1.55}.sub::before{font-size:9px}.day{padding:16px 14px 20px}.day h2{font-size:19px}.day::after{font-size:32px;right:10px;bottom:8px}.timeline li{padding:8px 2px}.time{min-width:58px}}
+@media print{body{background:#fff}.hero,.verified,.day{box-shadow:none}}
+
 </style>
 </head>
 <body>
@@ -195,6 +239,7 @@ days.forEach((day,index)=>{
             clonedWrap.style.padding=mobileCapture?'18px 18px 60px':'28px 18px 60px';
           }
           const clonedDay=clonedDocument.getElementById(day.id);
+          if(clonedDay)clonedDay.style.gridColumn='1 / -1';
           const clonedButton=clonedDay&&clonedDay.querySelector('.day-save-button');
           if(clonedButton)clonedButton.remove();
         }
