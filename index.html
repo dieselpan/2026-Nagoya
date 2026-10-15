@@ -59,9 +59,9 @@ html{scroll-behavior:smooth}
 :root{color-scheme:light;--paper:#fffdf7;--ink:#473b31;--muted:#766b5e;--line:#e8ddc9;--forest:#466b5b;--coral:#b96357}
 body{color:var(--ink);background-color:#f3ecdc;background-image:radial-gradient(ellipse at 12% 4%,rgba(255,255,255,.9),transparent 30%),radial-gradient(ellipse at 92% 28%,rgba(231,206,166,.24),transparent 34%),repeating-linear-gradient(0deg,rgba(138,111,73,.035) 0 1px,transparent 1px 5px)}
 .wrap{max-width:1020px}
-.hero{position:relative;overflow:hidden;padding:30px 150px 26px 30px;background:linear-gradient(115deg,#fffdf7 0%,#fff9ed 70%,#f5e9d3 100%);border:1px solid #e6dac4;border-radius:8px 18px 12px 18px;box-shadow:0 8px 22px rgba(85,65,39,.10),4px 5px 0 rgba(207,185,145,.18)}
+.hero{position:relative;overflow:hidden;padding:30px 196px 26px 30px;background:linear-gradient(115deg,#fffdf7 0%,#fff9ed 70%,#f5e9d3 100%);border:1px solid #e6dac4;border-radius:8px 18px 12px 18px;box-shadow:0 8px 22px rgba(85,65,39,.10),4px 5px 0 rgba(207,185,145,.18)}
 .hero::before{content:"";position:absolute;top:8px;left:34px;width:112px;height:22px;background:repeating-linear-gradient(135deg,rgba(205,157,107,.25) 0 7px,rgba(255,255,255,.48) 7px 14px);transform:rotate(-5deg);opacity:.85}
-.hero::after{display:none}.hero-cat-image{position:absolute;right:20px;top:14px;width:112px;height:108px;object-fit:contain;clip-path:circle(40.2% at 51.5% 50%);filter:drop-shadow(0 4px 5px rgba(72,54,34,.18));z-index:2}
+.hero::after{display:none}.hero-cat-image{position:absolute;right:16px;top:50%;transform:translateY(-50%);width:150px;height:148px;object-fit:contain;clip-path:circle(40.2% at 51.5% 50%);filter:drop-shadow(0 4px 5px rgba(72,54,34,.18));z-index:2}
 .hero h1{font-family:"Palatino Linotype","Noto Serif TC","Songti TC",serif;font-size:clamp(26px,4vw,36px);letter-spacing:.035em;color:#4c3d30}
 .sub{display:inline-block;margin-top:4px;padding:6px 12px;background:#f4dfd6;border-radius:3px 10px 5px 8px;color:#754c43;box-decoration-break:clone;-webkit-box-decoration-break:clone;transform:rotate(-.5deg)}
 .sub::before{content:"TRAVEL DIARY  •  ";font:700 10px/1.5 Georgia,serif;letter-spacing:.15em;color:#9b6d5d}
@@ -95,7 +95,7 @@ body{color:var(--ink);background-color:#f3ecdc;background-image:radial-gradient(
 .spot-card{background-color:#fffdf7;background-image:repeating-linear-gradient(0deg,transparent 0 31px,rgba(141,119,84,.06) 31px 32px);border-color:#e3d5bc}
 @media(min-width:900px){.wrap{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 20px}.hero,.verified,.footer{grid-column:1/-1}.hero,.verified{margin:0}.day{grid-column:span 1}.day h2{font-size:20px}}
 @media(max-width:899px){.wrap{display:block}.hero,.verified{margin-bottom:18px}.day{margin:16px 0}}
-@media(max-width:640px){.hero{padding:27px 82px 22px 20px}.hero::before{left:22px;width:84px}.hero-cat-image{right:12px;top:18px;width:70px;height:67px}.hero h1{font-size:24px;line-height:1.35}.sub{font-size:14px;line-height:1.55}.sub::before{font-size:9px}.day{padding:16px 14px 20px}.day h2{font-size:19px}.day::after{font-size:32px;right:10px;bottom:8px}.timeline li{padding:8px 2px}.time{min-width:58px}}
+@media(max-width:640px){.hero{padding:27px 108px 22px 20px}.hero::before{left:22px;width:84px}.hero-cat-image{right:8px;top:50%;transform:translateY(-50%);width:92px;height:90px}.hero h1{font-size:24px;line-height:1.35}.sub{font-size:14px;line-height:1.55}.sub::before{font-size:9px}.day{padding:16px 14px 20px}.day h2{font-size:19px}.day::after{font-size:32px;right:10px;bottom:8px}.timeline li{padding:8px 2px}.time{min-width:58px}}
 @media print{body{background:#fff}.hero,.verified,.day{box-shadow:none}}
 
 
@@ -269,7 +269,7 @@ body{color:var(--ink);background-color:#f3ecdc;background-image:radial-gradient(
 <div class="hero">
 <h1>🍁 2026 名古屋親子 8 天 7 夜</h1>
 <img class="hero-cat-image" src="assets/tokonyan-badge.png" alt="常滑守護貓 Tokonyan 圓形徽章" width="202" height="176" decoding="async">
-<div class="sub">2026/11/22（日／日曜日）～ 11/29（日／日曜日）｜重點：平日高山、11/28 熱田＋白鳥庭園、幼兒友善、不急行軍</div>
+<div class="sub">2026/11/22（日／日曜日）～ 11/29（日／日曜日）</div>
 
 </div>
 
