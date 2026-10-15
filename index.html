@@ -119,8 +119,6 @@ window.addEventListener('resize',()=>{if(current){shade.hidden=!(mobile()&&pinne
 (()=>{const nav=document.getElementById('timeline-nav'),toggle=document.getElementById('timeline-toggle'),close=document.getElementById('timeline-close'),top=document.getElementById('back-top');const setOpen=value=>{nav.classList.toggle('open',value);toggle.setAttribute('aria-expanded',String(value));};toggle.addEventListener('click',()=>setOpen(!nav.classList.contains('open')));close.addEventListener('click',()=>setOpen(false));nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>setOpen(false)));document.addEventListener('keydown',e=>{if(e.key==='Escape')setOpen(false);});const updateTop=()=>{top.hidden=window.scrollY<=window.innerHeight;};window.addEventListener('scroll',updateTop,{passive:true});window.addEventListener('resize',updateTop);updateTop();})();
 </script><script>
 (()=> {
-let libraryP<script>
-(()=> {
 let libraryPromise=null,saving=false;
 const themes=[
   {icon:'✈️',color:'#3c6a7b'},
@@ -235,4 +233,4 @@ days.forEach((day,index)=>{
   });
 });
 })();
-</script>
+</script></body></html>
