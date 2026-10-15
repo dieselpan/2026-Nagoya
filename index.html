@@ -110,7 +110,8 @@ body{color:var(--ink);background-color:#f3ecdc;background-image:radial-gradient(
 .vehicle:focus-visible{outline:3px solid #d89638;outline-offset:3px;border-radius:12px}
 .vehicle svg{display:block;width:100%;height:100%;overflow:visible;pointer-events:none}
 #vehicle-train{width:150px;height:62px}
-#vehicle-racer,#vehicle-taxi{width:104px;height:62px}
+#vehicle-racer{width:128px;height:64px}
+#vehicle-taxi{width:104px;height:62px}
 @media(prefers-reduced-motion:reduce){.vehicle{transition:none}}
 </style>
 </head>
@@ -142,16 +143,23 @@ body{color:var(--ink);background-color:#f3ecdc;background-image:radial-gradient(
       <text x="75" y="50" fill="#fff" font-size="8" font-family="sans-serif" font-weight="700">SHINKANSEN</text>
     </svg>
   </button>
-  <button class="vehicle" id="vehicle-racer" type="button" aria-label="拖曳卡通跑車" title="按住拖曳卡通跑車">
-    <svg viewBox="0 0 120 72" aria-hidden="true" focusable="false">
-      <path d="M15 45h10l9-15q4-6 12-7h33q9 1 16 9l9 7h8v13H13z" fill="#d85b4d" stroke="#754238" stroke-width="2"/>
-      <path d="m39 31 7-7h18v12H34zM69 24h9q7 1 13 10H69z" fill="#cce4e8" stroke="#754238" stroke-width="1.5"/>
-      <path d="M17 43h91v7H17z" fill="#f5c36e"/>
-      <path d="M15 36h-7v3h8M107 38h7v4h-7" fill="#473c38"/>
-      <circle cx="34" cy="52" r="8" fill="#393d40"/><circle cx="34" cy="52" r="3.5" fill="#e9e2d4"/>
-      <circle cx="91" cy="52" r="8" fill="#393d40"/><circle cx="91" cy="52" r="3.5" fill="#e9e2d4"/>
-      <path d="M91 27h13v-5H91M98 22v-5" fill="none" stroke="#754238" stroke-width="3" stroke-linecap="round"/>
-      <path d="M50 41h18" stroke="#fff1df" stroke-width="2" stroke-linecap="round"/>
+  <button class="vehicle" id="vehicle-racer" type="button" aria-label="拖曳 Toyota AE86" title="按住拖曳 Toyota AE86">
+    <svg viewBox="0 0 140 72" aria-hidden="true" focusable="false">
+      <ellipse cx="71" cy="61" rx="53" ry="3.5" fill="#4c443b" opacity=".18"/>
+      <path d="M12 50V43q0-4 6-5l12-1 10-13q4-5 11-5h27q10 0 17 7l12 12 17 2q6 1 8 6v4z" fill="#f7f4e9" stroke="#292d2e" stroke-width="2" stroke-linejoin="round"/>
+      <path d="m33 36 10-11q3-4 8-4h11v15z" fill="#27343a" stroke="#292d2e" stroke-width="1.4"/>
+      <path d="M66 21h12q8 0 14 7l8 8H66z" fill="#263238" stroke="#292d2e" stroke-width="1.4"/>
+      <path d="M63 21v15M66 38h31" fill="none" stroke="#f7f4e9" stroke-width="1.5"/>
+      <path d="M99 36 106 38 126 40q4 1 5 4l-1 3h-31z" fill="#25292b"/>
+      <path d="M14 46h17v4H14zM99 46h31v4H99z" fill="#24282a"/>
+      <path d="M17 41h5M129 42h3v3h-4" fill="none" stroke="#d5ae68" stroke-width="2"/>
+      <path d="M25 50h92" stroke="#202526" stroke-width="3"/>
+      <path d="M28 51a13 13 0 0 1 25 0M94 51a13 13 0 0 1 25 0" fill="none" stroke="#202526" stroke-width="2"/>
+      <circle cx="40.5" cy="51" r="8" fill="#24282a"/><circle cx="40.5" cy="51" r="4.2" fill="#d8d5c9"/><circle cx="40.5" cy="51" r="1.5" fill="#666b69"/>
+      <circle cx="106.5" cy="51" r="8" fill="#24282a"/><circle cx="106.5" cy="51" r="4.2" fill="#d8d5c9"/><circle cx="106.5" cy="51" r="1.5" fill="#666b69"/>
+      <path d="M56 39h28v8H56z" fill="#faf7ed" stroke="#c5bda9" stroke-width=".7"/>
+      <text x="58" y="45" fill="#25292b" font-size="5.4" font-family="sans-serif" font-weight="700">AE86</text>
+      <path d="M116 39h7" stroke="#d6b86e" stroke-width="2"/>
     </svg>
   </button>
   <button class="vehicle" id="vehicle-taxi" type="button" aria-label="拖曳日本計程車" title="按住拖曳日本計程車">
