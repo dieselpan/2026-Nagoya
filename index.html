@@ -37,9 +37,8 @@ html{scroll-behavior:smooth}
 .day-save-button{position:relative;flex:0 0 42px;width:42px;height:42px;padding:0;border:2px solid #fff;border-radius:13px;color:#fff;box-shadow:0 2px 8px rgba(0,0,0,.18);cursor:pointer;display:grid;place-items:center;font-size:21px;line-height:1;transition:transform .15s ease,filter .15s ease}
 .day-save-button:hover{filter:brightness(.92);transform:translateY(-1px)}
 .day-save-button:focus-visible{outline:3px solid #d89638;outline-offset:3px}
-.day-save-button .day-save-arrow{position:absolute;right:-5px;bottom:-5px;display:grid;place-items:center;width:17px;height:17px;border:2px solid #fff;border-radius:50%;background:#d69b2d;color:#fff;font-size:12px;font-weight:800;line-height:1}
 .day-save-button.is-saving{opacity:.65;cursor:wait}
-@media(max-width:640px){.day h2{gap:8px}.day-save-button{flex-basis:38px;width:38px;height:38px;font-size:19px}.day-save-button .day-save-arrow{width:16px;height:16px;font-size:11px}}
+@media(max-width:640px){.day h2{gap:8px}.day-save-button{flex-basis:38px;width:38px;height:38px;font-size:19px}}
 
 </style>
 </head>
@@ -161,7 +160,7 @@ days.forEach((day,index)=>{
   button.setAttribute('aria-label','下載 '+dayLabel+' 行程圖片：'+dayTitle);
   button.setAttribute('data-html2canvas-ignore','true');
   button.style.backgroundColor=theme.color;
-  button.innerHTML='<span class="day-theme-icon" aria-hidden="true">'+theme.icon+'</span><span class="day-save-arrow" aria-hidden="true">↓</span>';
+  button.innerHTML='<span class="day-theme-icon" aria-hidden="true">'+theme.icon+'</span>';
   heading.replaceChildren(button,title);
   buttons.push(button);
   button.addEventListener('click',async()=>{
