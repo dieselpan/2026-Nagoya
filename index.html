@@ -22,11 +22,9 @@ html{scroll-behavior:smooth}
 .timeline-nav li+li{margin-top:3px}
 .timeline-nav a{display:block;padding:7px 8px;border-radius:8px;color:#31564a;text-decoration:none;font-size:13px;line-height:1.4}
 .timeline-nav a:hover,.timeline-nav a:focus-visible{background:#eaf3ed}
-.timeline-toggle,.back-top{position:fixed;z-index:40;bottom:max(16px,env(safe-area-inset-bottom));display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 14px;border:0;border-radius:999px;background:#315d4d;color:#fff;font:inherit;font-size:14px;font-weight:700;box-shadow:0 4px 14px rgba(0,0,0,.18);cursor:pointer;text-decoration:none}
+.timeline-toggle{position:fixed;z-index:40;bottom:max(16px,env(safe-area-inset-bottom));display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 14px;border:0;border-radius:999px;background:#315d4d;color:#fff;font:inherit;font-size:14px;font-weight:700;box-shadow:0 4px 14px rgba(0,0,0,.18);cursor:pointer;text-decoration:none}
 .timeline-toggle{left:16px}
-.back-top{right:16px}
-.back-top[hidden]{display:none}
-.timeline-toggle:focus-visible,.timeline-close:focus-visible,.back-top:focus-visible{outline:3px solid #d89638;outline-offset:3px}
+.timeline-toggle:focus-visible,.timeline-close:focus-visible{outline:3px solid #d89638;outline-offset:3px}
 @media(min-width:1360px){.timeline-nav{display:block;left:max(12px,calc((100vw - 1016px)/2 - 190px))}.timeline-toggle,.timeline-close{display:none}}
 @media(max-width:1359px){.timeline-toggle{display:inline-flex}.timeline-nav.open{display:block;position:fixed;top:auto;left:12px;bottom:calc(68px + env(safe-area-inset-bottom));transform:none;width:min(280px,calc(100vw - 24px));max-height:65vh}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
@@ -75,7 +73,7 @@ body{color:var(--ink);background-color:#f3ecdc;background-image:radial-gradient(
 #day-6{--day-ink:#568094;--day-wash:#e7f0f2;--day-rule:rgba(86,128,148,.27);--day-doodle:"🏔️"}
 #day-7{--day-ink:#bb694b;--day-wash:#f8e9df;--day-rule:rgba(187,105,75,.27);--day-doodle:"🍁"}
 #day-8{--day-ink:#627c8a;--day-wash:#e9eef0;--day-rule:rgba(98,124,138,.27);--day-doodle:"🛫"}
-.timeline-toggle,.back-top{background:#496c5c;border:1px solid rgba(255,255,255,.78);box-shadow:0 5px 14px rgba(62,79,60,.22)}
+.timeline-toggle{background:#496c5c;border:1px solid rgba(255,255,255,.78);box-shadow:0 5px 14px rgba(62,79,60,.22)}
 .timeline-nav{background:#fffdf7;border-color:#e4d7c1;box-shadow:0 8px 24px rgba(78,61,39,.15)}
 .timeline-nav a{color:#466b5b}
 .spot-card{background-color:#fffdf7;background-image:repeating-linear-gradient(0deg,transparent 0 31px,rgba(141,119,84,.06) 31px 32px);border-color:#e3d5bc}
@@ -106,7 +104,7 @@ body{color:var(--ink);background-color:#f3ecdc;background-image:radial-gradient(
 </style>
 </head>
 <body>
-<button class="timeline-toggle" id="timeline-toggle" type="button" aria-expanded="false" aria-controls="timeline-nav">時間軸</button>
+<button class="timeline-toggle" id="timeline-toggle" type="button" aria-expanded="false" aria-controls="timeline-nav">TOP</button>
 <nav class="timeline-nav" id="timeline-nav" aria-label="行程時間軸">
   <div class="timeline-nav-head"><strong>時間軸</strong><button class="timeline-close" id="timeline-close" type="button" aria-label="關閉時間軸">×</button></div>
   <ol>
@@ -120,7 +118,6 @@ body{color:var(--ink);background-color:#f3ecdc;background-image:radial-gradient(
     <li><a href="#day-8">Day 8｜中部國際機場＋回台</a></li>
   </ol>
 </nav>
-<a class="back-top" id="back-top" href="#page-top" aria-label="回到頁面頂端" hidden>回到 TOP ↑</a>
 <div class="wrap" id="page-top">
 <div class="hero">
 <h1>🍁 2026 名古屋親子 8 天 7 夜</h1>
@@ -178,7 +175,7 @@ closeButton.addEventListener('click',()=>hide(true));shade.addEventListener('cli
 window.addEventListener('resize',()=>{if(current){shade.hidden=!(mobile()&&pinned);document.body.style.overflow=mobile()&&pinned?'hidden':'';place()}});window.addEventListener('scroll',()=>{if(current&&!mobile()){const r=current.getBoundingClientRect();if(r.bottom<0||r.top>innerHeight)hide();else place()}},{passive:true});
 })();
 </script><script>
-(()=>{const nav=document.getElementById('timeline-nav'),toggle=document.getElementById('timeline-toggle'),close=document.getElementById('timeline-close'),top=document.getElementById('back-top');const setOpen=value=>{nav.classList.toggle('open',value);toggle.setAttribute('aria-expanded',String(value));};toggle.addEventListener('click',()=>setOpen(!nav.classList.contains('open')));close.addEventListener('click',()=>setOpen(false));nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>setOpen(false)));document.addEventListener('keydown',e=>{if(e.key==='Escape')setOpen(false);});const updateTop=()=>{top.hidden=window.scrollY<=window.innerHeight;};window.addEventListener('scroll',updateTop,{passive:true});window.addEventListener('resize',updateTop);updateTop();})();
+(()=>{const nav=document.getElementById('timeline-nav'),toggle=document.getElementById('timeline-toggle'),close=document.getElementById('timeline-close');const setOpen=value=>{nav.classList.toggle('open',value);toggle.setAttribute('aria-expanded',String(value));};toggle.addEventListener('click',()=>setOpen(!nav.classList.contains('open')));close.addEventListener('click',()=>setOpen(false));nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>setOpen(false)));document.addEventListener('keydown',e=>{if(e.key==='Escape')setOpen(false);});})();
 </script><script>
 (()=> {
 let libraryPromise=null,saving=false;
